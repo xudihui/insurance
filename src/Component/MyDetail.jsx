@@ -35,6 +35,15 @@ class List extends Component {
 }
 
 class ListItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {toggle: true};
+    }
+    toggle(){
+        this.setState({
+            show:!this.state.show
+        });
+    }
     render() {
         let {proName,userName,time,status,id,contents,type} = this.props.data;
         let showType = (type) => {
@@ -47,14 +56,15 @@ class ListItem extends Component {
             }
         }
         return (
-            <li className="detailList">
-                <h3 data-flex="main:justify" className={status}>
+            <li className={"detailList " + this.state.toggle }>
+                <h3 data-flex="main:justify" className={status} onClick={  this.props.key_ != 0 ? this.toggle.bind(this) : function(){alert(1)}}>
                     <span>{proName}</span>
                     <span>
                     { this.props.key_ == 0 ? (status ? '已生效' : '未生效'): <i className="icon iconfont icon-arrow-right"></i>}
                     </span>
                 </h3>
                 <div className="line"></div>
+                <div className="content">
                 {showType(type)}
                 {
                     contents.map((item,index) => {  //输出保单具体项目
@@ -66,12 +76,12 @@ class ListItem extends Component {
                       )
                     })
                 }
-
+                </div>
             </li>
         );
     }
-    shouldComponentUpdate(np) {
-        return false;
+    shouldComponentUpdate(np) { //当setState的时候，是否触发render；
+        return true;
     }
 }
 
@@ -98,8 +108,8 @@ class Main extends Component {
 class Content extends Component {
     constructor(props) {
         super(props);
+        this.state = {a:222};
     }
-
     render() {
         var data = [
             {
@@ -132,7 +142,7 @@ class Content extends Component {
                 ]
             }
         ];
-        for(let i = 0;i < 20;i++){
+        for(let i = 0;i < 5;i++){
             data.push(
                 {
                     "id": "58d0fb3517f61387400b7e15",
@@ -150,7 +160,7 @@ class Content extends Component {
                 })
         }
         return (
-            <div className="index-list-box">
+            <div className="index-list-box" >
                 {
                     data.length > 0 ? <List list={data} /> : null
                 }

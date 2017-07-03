@@ -162,7 +162,9 @@ img {
         span:last-child{
             color:#31b219;
             i{
-                color:#888
+                color:#888;
+                display:inline-block;
+                transition:.3s;
             }
         }
     }
@@ -177,6 +179,15 @@ img {
         }
     }
 
+}
+.detailList.false{
+   padding-bottom:0;
+    .content{
+        display:none;
+    }
+    i{
+        transform: rotate(90deg);
+    }
 }
 .data-load {
     .msg {
