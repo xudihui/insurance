@@ -9,7 +9,7 @@ var proxy = [{
     host: 'cnodejs.org'
 }];
 
-//启动服务
+//启动服务 端口号暂时设定为4000
 var server = new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     proxy: proxy,
